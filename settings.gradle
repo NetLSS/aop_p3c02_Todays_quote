@@ -1,0 +1,2 @@
+rootProject.name = "Todays_quote"
+include ':app'
