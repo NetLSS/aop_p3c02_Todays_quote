@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<!--
-    ViewPager2 는 1에서 보다 더 개선된 버전으로 보면 되는데
-        실무에서는 아직까지 많이 쓰진 않는 것으로 앎.
-        기존의 레거시에서 사용해왔고 완전 대체하기에는 어렵다함
-        결과적으로는 2로 다 넘어 올것.
+    <!--
+        - ViewPager2 는 1에서 보다 더 개선된 버전으로 보면 되는데
+            실무에서는 아직까지 많이 쓰진 않는 것으로 앎.
+            기존의 레거시에서 사용해왔고 완전 대체하기에는 어렵다함
+            결과적으로는 2로 다 넘어 올것.
 
-        특징
-            - 가로 세로 모두 스와이프 가능
-            - RTL 지원
-            - modifiable 개선
-            - 기존 뷰페이저와 다르게 recyclerView 를 기반으로
--->
+            - 특징
+                - 가로 세로 모두 스와이프 가능
+                - RTL 지원
+                - modifiable 개선
+                - 기존 뷰페이저와 다르게 recyclerView 를 기반으로
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        - 간단 ui 경우 프레임 레이아웃 사용하는 것이 간단
+
+    -->
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</FrameLayout>
