@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initData() {
+        // remoteConfig 설정
         val remoteConfig = Firebase.remoteConfig
         remoteConfig.setConfigSettingsAsync(
             remoteConfigSettings {
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             // 패치 작업이 완료 된 경우
             if (it.isSuccessful) {
                 val quotes = parseQuotesJson(remoteConfig.getString("quote"))
-                val isNameRevealed = true //remoteConfig.getBoolean("is_name_revealed")
+                val isNameRevealed = remoteConfig.getBoolean("is_name_revealed")
 
                 displayQuotesPager(quotes, isNameRevealed)
 
@@ -45,7 +46,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun displayQuotesPager(quotes: List<Quote>, isNameRevealed: Boolean){
         viewPager.adapter = QuotesPagerAdapter(
-            quotes
+            quotes,
+            isNameRevealed
         )
     }
 

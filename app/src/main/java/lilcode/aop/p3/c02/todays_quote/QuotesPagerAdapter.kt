@@ -12,7 +12,10 @@ onBindViewHolder(ViewHolder holder, int position)	position에 해당하는 데�
 getItemCount()	전체 아이템 갯수 리턴.
  */
 
-class QuotesPagerAdapter(private val quotes: List<Quote>) :
+class QuotesPagerAdapter(
+    private val quotes: List<Quote>,
+    private val isNameRevealed: Boolean
+) :
     RecyclerView.Adapter<QuotesPagerAdapter.QuoteViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuoteViewHolder =
@@ -22,7 +25,7 @@ class QuotesPagerAdapter(private val quotes: List<Quote>) :
         )
 
     override fun onBindViewHolder(holder: QuoteViewHolder, position: Int) {
-        holder.bind(quotes[position])
+        holder.bind(quotes[position], isNameRevealed)
     }
 
     override fun getItemCount(): Int = quotes.size
@@ -33,10 +36,17 @@ class QuotesPagerAdapter(private val quotes: List<Quote>) :
         private val quoteTextView: TextView = itemView.findViewById(R.id.quoteTextView)
         private val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
 
-        fun bind(quote: Quote) {
+        fun bind(quote: Quote, isNameRevealed: Boolean) {
             // 어떻게 랜더링 할 것인가
             quoteTextView.text = quote.quote // 명언 내용
-            nameTextView.text = quote.name // 작가
+
+            // 원격 isNameRevealed 에 따라 분기
+            if (isNameRevealed) {
+                nameTextView.text = quote.name // 작가
+                nameTextView.visibility = View.VISIBLE
+            } else {
+                nameTextView.visibility = View.GONE
+            }
         }
     }
 }
