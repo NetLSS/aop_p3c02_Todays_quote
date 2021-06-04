@@ -30,11 +30,11 @@ class MainActivity : AppCompatActivity() {
         initData()
     }
 
-    private fun initViews(){
+    private fun initViews() {
         viewPager.setPageTransformer { page, position ->
             // position 현재 보이는 화면에서 상대적으로 어느 위치에 있는지
 
-            when{
+            when {
                 position.absoluteValue >= 1F -> {
                     page.alpha = 0F
                 }
@@ -72,11 +72,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun displayQuotesPager(quotes: List<Quote>, isNameRevealed: Boolean){
-        viewPager.adapter = QuotesPagerAdapter(
+    private fun displayQuotesPager(quotes: List<Quote>, isNameRevealed: Boolean) {
+        val adapter = QuotesPagerAdapter(
             quotes,
             isNameRevealed
         )
+
+        viewPager.adapter = adapter
+        // 중앙에서 시작
+        viewPager.setCurrentItem(adapter.itemCount / 2, false)
     }
 
     private fun parseQuotesJson(json: String): List<Quote> {
