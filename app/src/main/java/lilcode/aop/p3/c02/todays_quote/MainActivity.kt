@@ -2,6 +2,8 @@ package lilcode.aop.p3.c02.todays_quote
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
 import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
@@ -13,6 +15,10 @@ class MainActivity : AppCompatActivity() {
 
     private val viewPager: ViewPager2 by lazy {
         findViewById(R.id.viewPager)
+    }
+
+    private val progressBar: ProgressBar by lazy {
+        findViewById(R.id.progressBar)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         remoteConfig.fetchAndActivate().addOnCompleteListener {
             // 패치 작업이 완료 된 경우
+            progressBar.visibility = View.GONE
             if (it.isSuccessful) {
                 val quotes = parseQuotesJson(remoteConfig.getString("quote"))
                 val isNameRevealed = remoteConfig.getBoolean("is_name_revealed")
