@@ -1,5 +1,6 @@
 package lilcode.aop.p3.c02.todays_quote
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,13 +37,14 @@ class QuotesPagerAdapter(
         private val quoteTextView: TextView = itemView.findViewById(R.id.quoteTextView)
         private val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
 
+        @SuppressLint("SetTextI18n")
         fun bind(quote: Quote, isNameRevealed: Boolean) {
             // 어떻게 랜더링 할 것인가
-            quoteTextView.text = quote.quote // 명언 내용
+            quoteTextView.text = "\"${quote.quote}\"" // 명언 내용
 
             // 원격 isNameRevealed 에 따라 분기
             if (isNameRevealed) {
-                nameTextView.text = quote.name // 작가
+                nameTextView.text = "- ${quote.name}" // 작가
                 nameTextView.visibility = View.VISIBLE
             } else {
                 nameTextView.visibility = View.GONE
